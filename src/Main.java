@@ -4,7 +4,7 @@ public class Main {
 
     private static ArrayList<Character> getVariablesUsed(String formula) {
         ArrayList<Character> vars = new ArrayList<>();
-        for(char c: formula.toCharArray()) {
+        for (char c : formula.toCharArray()) {
             if (Character.isAlphabetic(c) && !vars.contains(c)) {
                 vars.add(c);
             }
@@ -16,7 +16,7 @@ public class Main {
         HashMap<Character, Boolean> result = new HashMap<>();
 
         int i = 0;
-        while(i < vars.size()) {
+        while (i < vars.size()) {
             char c = vars.get(i);
             System.out.print("Enter value of '" + c + "': ");
             String inp = scanner.nextLine();
@@ -35,6 +35,13 @@ public class Main {
         return result;
     }
 
+    private static HashMap<Character, Boolean> assignRandomVariables(ArrayList<Character> vars) {
+        HashMap<Character, Boolean> result = new HashMap<>();
+        for (char c : vars) {
+            result.put(c, false);
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -42,6 +49,7 @@ public class Main {
         System.out.print("Enter formula: ");
         String formula = scan.nextLine();
 
+        // Evaluate formula
         HashMap<Character, Boolean> vars = Main.assignVariables(Main.getVariablesUsed(formula), scan);
 
         ArrayList<Token> tokens = Token.tokenize(formula, vars);
